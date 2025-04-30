@@ -5,10 +5,17 @@ import MUIFormControl from "@mui/material/FormControl";
 import MUISelect, { SelectProps } from "@mui/material/Select";
 import MUIFormHelperText from "@mui/material/FormHelperText";
 
-import { SelectOption } from "types/selectTypes";
+// import { SelectOption } from "types/selectTypes";
+
+export interface SelectOption<ValueType> {
+  label: string;
+  value: ValueType;
+  disabled?: boolean;
+  tooltipText?: string;
+}
 
 type Props = {
-  options: Array<SelectOption>;
+  options: Array<SelectOption<ValueType>>;
   onChange: SelectProps["onChange"];
   value: string | Array<string>;
   helperText?: string;
@@ -18,7 +25,7 @@ type Props = {
   disabled?: boolean;
   error?: boolean;
   className?: string;
-  renderMenuItemContent?: (options: SelectOption) => ReactNode;
+  renderMenuItemContent?: (options: SelectOption<ValueType>) => ReactNode;
   renderValue?: () => ReactNode;
   sqaPrefix?: string;
 };

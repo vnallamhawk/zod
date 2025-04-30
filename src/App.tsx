@@ -5,7 +5,7 @@ import { Form, Field } from "react-final-form";
 import { z } from "zod";
 import AlientTestForm from "./components/AlientTestForm";
 import AllSubmissions from "./views/AllSubmissions";
-import { validateEnv } from "../env";
+import { validateEnv } from "./env";
 
 validateEnv();
 export default function App() {

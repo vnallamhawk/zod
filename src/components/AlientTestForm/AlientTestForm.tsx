@@ -7,11 +7,11 @@ import {
   HAS_VISITED_EARTH_OPTIONS,
   SPECIES_OPTIONS,
 } from "../../constants/alientFormConstants";
-import Select from "../Select";
-import TextField from "../../Components/TextField";
+import Select from "../../components/Select";
+import TextField from "../../components/TextField";
 import { Alien } from "../../clients/schemas";
 import { getEnumOptions } from "../../services/dataServices";
-import DatePicker from "../../Components/DatePicker";
+import DatePicker from "../../components/DatePicker";
 import { format } from "date-fns";
 
 const AlienFormSchema = Alien.extend({
