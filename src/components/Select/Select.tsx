@@ -14,7 +14,7 @@ export interface SelectOption<ValueType> {
   tooltipText?: string;
 }
 
-type Props = {
+interface Props<ValueType> {
   options: Array<SelectOption<ValueType>>;
   onChange: SelectProps["onChange"];
   value: string | Array<string>;
@@ -28,9 +28,11 @@ type Props = {
   renderMenuItemContent?: (options: SelectOption<ValueType>) => ReactNode;
   renderValue?: () => ReactNode;
   sqaPrefix?: string;
-};
+}
 
-const Select = ({
+const Select = <
+  ValueType extends string | number | boolean | object | unknown[]
+>({
   label,
   placeholder,
   options,
@@ -43,7 +45,7 @@ const Select = ({
   className,
   renderMenuItemContent,
   renderValue,
-}: Props) => {
+}: Props<ValueType>) => {
   return (
     <MUIFormControl
       fullWidth
@@ -65,7 +67,11 @@ const Select = ({
         {options.map((option) => {
           const { disabled, value, label } = option;
           const item = (
-            <MUIMenuItem key={value} value={value} disabled={disabled}>
+            <MUIMenuItem
+              key={`menu-item-${label}`}
+              value={value as any}
+              disabled={disabled}
+            >
               {renderMenuItemContent ? renderMenuItemContent(option) : label}
             </MUIMenuItem>
           );
