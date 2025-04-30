@@ -3,7 +3,7 @@ import { z } from "zod";
 // This file is going to be auto generated
 export const Alien = z.object({
   name: z.string(),
-  birthYear: z
+  dob: z
     .string()
     .regex(
       /^[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])$/

@@ -98,14 +98,11 @@ export default class FetchApi {
                   data = response.blob();
                   break;
                 default:
-                  console.log("inside deafult");
                   data = await response.json();
               }
             } catch (error) {
-              console.log(error);
               console.error(error);
             }
-            console.log(data);
 
             return data;
           }
@@ -129,12 +126,10 @@ export default class FetchApi {
             }
           }
 
-          console.log(apiError);
           this.errorHandler(apiError);
         }
       },
       (err) => {
-        console.log(err);
         const callError = new FetchApiError("Call Error");
         callError.response = err;
 

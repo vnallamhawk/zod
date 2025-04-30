@@ -16,7 +16,7 @@ import { format } from "date-fns";
 
 const AlienFormSchema = Alien.extend({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  birthYear: z.date().transform((value) => format(value, "yyyy-MM-dd")),
+  dob: z.date().transform((value) => format(value, "yyyy-MM-dd")),
 })
   .strict()
   .refine(
@@ -56,19 +56,15 @@ type Alien = z.infer<typeof AlienFormSchema>;
 
 export const AlientTestForm = () => {
   const onSubmit = (values: Alien) => {
-    console.log({ values });
     const parsedValues = Alien.safeParse(values);
-    console.log({ parsedValues });
-
-    // const testParsing = { ...values, birthYear: "12-12-2023" };
-    // console.log(Alien.safeParse(testParsing));
-    // console.log(parsedValues);
+    // submission logic goes here
   };
 
+  // RHF supports a zodResolver import which can avoid this boiler plate code
+  // RFF didn't have one
   const validateZod = (values: Alien) => {
     try {
       const result = AlienFormSchema.safeParse(values);
-      console.log({ result });
       if (!result.success) {
         const finalFormErrors = result.error.flatten().fieldErrors;
         return finalFormErrors;
@@ -102,18 +98,8 @@ export const AlientTestForm = () => {
               }}
             </Field>
 
-            <Field name="birthYear">
+            <Field name="dob">
               {({ input, meta }) => (
-                // <TextField
-                //   {...input}
-                //   helperText={
-                //     meta.submitFailed && meta.error ? meta.error : undefined
-                //   }
-                //   placeholder="birthYear"
-                //   value={input.value}
-                //   error={meta.submitFailed && !!meta.error}
-                //   onChange={input.onChange}
-                // />
                 <DatePicker
                   value={input.value}
                   onChange={(value) => {
@@ -124,32 +110,6 @@ export const AlientTestForm = () => {
                 />
               )}
             </Field>
-
-            <Field name="species">
-              {({ input, meta }) => (
-                <Select
-                  options={getEnumOptions(Alien.shape.species)}
-                  value={input.value}
-                  error={meta.submitFailed && !!meta.error}
-                  helperText={meta.submitFailed && meta.error}
-                  onChange={input.onChange}
-                  placeholder="Select Species"
-                />
-              )}
-            </Field>
-            <Field name="hasVisitedEarth">
-              {({ input, meta }) => (
-                <Select
-                  options={HAS_VISITED_EARTH_OPTIONS}
-                  value={input.value}
-                  error={meta.submitFailed && !!meta.error}
-                  helperText={meta.submitFailed && meta.error}
-                  onChange={input.onChange}
-                  placeholder="Have you visited Earth?"
-                />
-              )}
-            </Field>
-
             <Field name="breathingMechanism">
               {({ input, meta }) => (
                 <Select
@@ -172,6 +132,30 @@ export const AlientTestForm = () => {
                   helperText={meta.submitFailed && meta.error}
                   onChange={input.onChange}
                   placeholder="What is your favorite food?"
+                />
+              )}
+            </Field>
+            <Field name="species">
+              {({ input, meta }) => (
+                <Select
+                  options={getEnumOptions(Alien.shape.species)}
+                  value={input.value}
+                  error={meta.submitFailed && !!meta.error}
+                  helperText={meta.submitFailed && meta.error}
+                  onChange={input.onChange}
+                  placeholder="Select Species"
+                />
+              )}
+            </Field>
+            <Field name="hasVisitedEarth">
+              {({ input, meta }) => (
+                <Select
+                  options={HAS_VISITED_EARTH_OPTIONS}
+                  value={input.value}
+                  error={meta.submitFailed && !!meta.error}
+                  helperText={meta.submitFailed && meta.error}
+                  onChange={input.onChange}
+                  placeholder="Have you visited Earth?"
                 />
               )}
             </Field>

@@ -12,7 +12,7 @@ export default function App() {
   return (
     <Router>
       <nav>
-        <Link to="/alien-test" style={{ marginRight: 10 }}>
+        <Link to="/alien-test-form" style={{ marginRight: 10 }}>
           Alien Test Form
         </Link>
         <Link
@@ -24,7 +24,7 @@ export default function App() {
       </nav>
 
       <Routes>
-        <Route path="/alien-test" element={<AlientTestForm />} />
+        <Route path="/alien-test-form" element={<AlientTestForm />} />
         <Route path="/submissions" element={<AllSubmissions />} />
         <Route path="*" element={<AlientTestForm />} /> {/* Default route */}
       </Routes>

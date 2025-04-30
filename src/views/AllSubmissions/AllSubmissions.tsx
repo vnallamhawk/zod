@@ -10,13 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { z } from "zod";
-import { useLocation, useParams } from "react-router-dom";
 import { useValidatePagination } from "../../hooks/useValidatePagination";
-
-const PaginationSchema = z.object({
-  page: z.coerce.number().positive(),
-  limit: z.coerce.number().positive(),
-});
 
 const AllSubmissions = () => {
   const { data, error } = useGetAllSubmissions();
