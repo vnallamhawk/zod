@@ -1,0 +1,15 @@
+{
+    "include": [
+        "./src/**/*"
+    ],
+    "compilerOptions": {
+        "baseURL": "src",
+        "strict": true,
+        "esModuleInterop": true,
+        "lib": [
+            "dom",
+            "es2019"
+        ],
+        "jsx": "react-jsx"
+    }
+}
