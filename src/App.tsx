@@ -24,7 +24,6 @@ export default function App() {
           All Submissions
         </Link>
       </nav>
-
       <Routes>
         <Route path="/alien-test-form" element={<AlientTestForm />} />
         <Route path="/submissions" element={<AllSubmissions />} />
