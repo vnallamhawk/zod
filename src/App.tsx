@@ -7,6 +7,8 @@ import AlientTestForm from "./components/AlientTestForm";
 import AllSubmissions from "./views/AllSubmissions";
 import { validateEnv } from "./env";
 
+// this can come handy when we want to validate env keys can catch typos in
+// env variables which TS can't
 validateEnv();
 export default function App() {
   return (
