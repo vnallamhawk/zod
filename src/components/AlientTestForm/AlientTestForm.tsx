@@ -14,8 +14,15 @@ import { getEnumOptions } from "../../services/dataServices";
 import DatePicker from "../../components/DatePicker";
 import { format } from "date-fns";
 
+// if a form has some has around 20 to 30 fields we don't have to redefine types
+// again for all the 30 fields again here.
+// We can just extend of the generated schema and add only the fields which require
+// customization again here
 const AlienFormSchema = Alien.extend({
-  name: z.string().min(2, "Name must be at least 2 characters"),
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(10, "Max Length musst be 10 characters"),
   dob: z.date().transform((value) => format(value, "yyyy-MM-dd")),
 })
   .strict()
@@ -27,37 +34,13 @@ const AlienFormSchema = Alien.extend({
     }
   );
 
-// const AlientTestFormSchema = z
-//   .object({
-//     name: z.string().min(2, "Name must be at least 2 characters"),
-//     birthYear: z.string().transform((value) => Number(value)),
-//     species: z.enum([
-//       "mercurian",
-//       "human",
-//       "martian",
-//       "venusian",
-//       "zorgan",
-//       "xantian",
-//       "falan",
-//     ]),
-//     hasVisitedEarth: z.boolean(),
-//     favoriteFood: z.enum(["rocks", "mac_n_cheese", "chicken_biriyani"]),
-//     breathingMechanism: z.enum(["oxygen", "nitrogen", "helium"]),
-//   })
-//   .refine(
-//     (data) => !(data.species === "human" && data.hasVisitedEarth === false),
-//     {
-//       message: "Humans must have visited Earth!",
-//       path: ["hasVisitedEarth"],
-//     }
-//   );
-
 type Alien = z.infer<typeof AlienFormSchema>;
 
 export const AlientTestForm = () => {
   const onSubmit = (values: Alien) => {
     const parsedValues = Alien.safeParse(values);
     // submission logic goes here
+    // AlienCreateSchema.parse(parseValues)
   };
 
   // RHF supports a zodResolver import which can avoid this boiler plate code
@@ -97,7 +80,6 @@ export const AlientTestForm = () => {
                 );
               }}
             </Field>
-
             <Field name="dob">
               {({ input, meta }) => (
                 <DatePicker

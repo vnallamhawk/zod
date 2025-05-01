@@ -22,6 +22,7 @@ export const Alien = z.object({
   breathingMechanism: z.enum(["oxygen", "nitrogen", "helium"]),
 });
 
+// This file is going to be auto generated
 export const AllSubmissionsGetResponseSchema = z.array(
   z.object({
     id: z.number(),

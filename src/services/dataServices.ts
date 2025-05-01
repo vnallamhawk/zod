@@ -1,10 +1,12 @@
+import { SelectOption } from "components/Select/Select";
 import { z } from "zod";
-import { SelectOption } from "../types/selectTypes";
 
 export const getEnumOptions = <T extends z.ZodEnum<[string, ...string[]]>>(
   enumSchema: T
-): SelectOption[] =>
-  Object.values(enumSchema.Values).map((value) => ({
+): SelectOption<z.infer<T>>[] =>
+  // the order of the enum is preserved since zod just stores the enum as an array and just returns
+  // it directly
+  Object.values(enumSchema.options).map((value) => ({
     label: value
       .toLowerCase()
       .split("_")

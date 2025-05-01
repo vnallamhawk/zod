@@ -17,7 +17,9 @@ const AllSubmissions = () => {
   useValidatePagination();
 
   return error ? (
-    <Fragment>Error </Fragment>
+    <Fragment>
+      <h1>HANDLE ERROR GRACEFULLY INSTEAD</h1>
+    </Fragment>
   ) : (
     <TableContainer
       component={Paper}
